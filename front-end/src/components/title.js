@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { searchValue, getRecipe } from "../actions";
+import Recipes from './recipes'
 
 const Title = (props) => {
   const [searchValues, setSearchValues] = useState("");
@@ -27,11 +28,7 @@ const Title = (props) => {
       className="d-flex justify-content-center flex-column"
       style={{ marginTop: "2rem", textAlign: "center" }}
     >
-      <div className="d-flex bg-light header flex-column justify-content-center">
-        <h1 style={{ fontSize: "20vh" }}>GRUBSPACE</h1>
-        <h3>Find your next favorite dish today!</h3>
-        <h5 style={{color: 'white'}}>Choose from over 5000 delicious recipes</h5>
-      </div>
+     
       <form onSubmit={handleClick}>
         <div>
           {" "}
@@ -59,6 +56,7 @@ const Title = (props) => {
           </button>
         </div>
       </form>
+      <Recipes />
     </div>
   );
 };
