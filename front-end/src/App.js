@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Title from "./components/title";
-import Recipes from "./components/recipes";
 import Home from './components/home'
-import { AppBar } from '@material-ui/core'
+//import { AppBar } from '@material-ui/core'
 import Login from './components/login'
 import Logout from './components/logout'
 import "bootstrap/dist/css/bootstrap.css";
