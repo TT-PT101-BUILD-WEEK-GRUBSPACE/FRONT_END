@@ -5,7 +5,7 @@ import {
   SEARCH_VALUE,
 } from "../actions";
 
-const log = console.log;
+//const log = console.log;
 
 //1. set initialState
 const initialState = {
@@ -19,19 +19,19 @@ export const appReducer = (state = initialState, action) => {
   //3. initialize switch statement
   switch (action.type) {
     case FETCHING_API_START: {
-      log("FETCH RUNNING THROUGH REDUCER");
+      //log("FETCH RUNNING THROUGH REDUCER");
       return { ...state, loading: true };
     }
     case FETCHING_API_SUCCESS: {
-      log("FETCH SUCCESS THROUGH REDUCER");
+      //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, loading: false, recipe: action.payload };
     }
     case FETCHING_API_FAILURE: {
-      log("FETCH FAIL FROM REDUCER");
+      //log("FETCH FAIL FROM REDUCER");
       return { ...state, loading: false, error: action.payload };
     }
     case SEARCH_VALUE: {
-      log("3. SEARCH VALUE FROM REDUCER", action.payload);
+      //log("3. SEARCH VALUE FROM REDUCER", action.payload);
       return { ...state, searchValue: action.payload };
     }
     default:

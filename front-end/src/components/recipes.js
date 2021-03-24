@@ -1,17 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getRecipe } from "../actions";
+import { makeStyles } from "@material-ui/core/styles";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const baseUri = "https://spoonacular.com/recipeImages/";
 
 const Recipe = (props) => {
   const data = props.recipe;
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      maxWidth: "50vw",
+      alignSelf: "center",
+      "& > * + *": {
+        marginTop: theme.spacing(2),
+      },
+    },
+  }));
+
+  const classes = useStyles();
+
   if (props.loading) {
     return (
-      <>
-        <h2 style={{alignSelf: 'center'}}>Loading...</h2>
-      </>
+      <div className={classes.root}>
+        <LinearProgress />
+        <LinearProgress />
+      </div>
     );
   }
 
@@ -28,7 +43,7 @@ const Recipe = (props) => {
                 margin: "3rem 2rem",
                 border: "2px solid black",
                 textAlign: "center",
-                color: 'white'
+                color: "white",
               }}
             >
               {" "}
