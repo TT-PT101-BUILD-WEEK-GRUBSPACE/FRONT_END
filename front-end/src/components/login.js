@@ -7,6 +7,7 @@ class Login extends React.Component {
     credentials: {
       username: "",
       password: "",
+      email:''
     },
   };
 
@@ -65,7 +66,17 @@ class Login extends React.Component {
             color="primary"
             style={{ backgroundColor: "white" }}
           />
-
+          <TextField
+            type="email"
+            name="email"
+            value={this.state.credentials.email}
+            onChange={this.handleChange}
+            variant="outlined"
+            label="Password"
+            margin="dense"
+            color="primary"
+            style={{ backgroundColor: "white" }}
+          />
           <Button
             onClick={this.login}
             style={{ color: "white", border: ".5px solid white" }}
