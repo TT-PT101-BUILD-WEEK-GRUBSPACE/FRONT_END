@@ -72,7 +72,7 @@ class Login extends React.Component {
             value={this.state.credentials.email}
             onChange={this.handleChange}
             variant="outlined"
-            label="Password"
+            label="Email"
             margin="dense"
             color="primary"
             style={{ backgroundColor: "white" }}
