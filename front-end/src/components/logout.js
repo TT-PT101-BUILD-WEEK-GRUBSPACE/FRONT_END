@@ -14,10 +14,12 @@ const Logout = () => {
       <div
         className="d-flex flex-column justify-content-between align-items-center"
         style={{
-          marginTop: "20rem",
           minHeight: "20vh",
           backgroundColor: "#222",
           color: "white",
+          textAlign: 'center',
+          padding: '8vh 3vw',
+          opacity: '0.9'
         }}
       >
         <Link
@@ -31,6 +33,8 @@ const Logout = () => {
             padding: '2rem 3rem'
           }}
         >
+          <h2>Thank you for visiting Grubspace.</h2>
+          <h3 style={{marginTop: '2vh', marginBottom: '5vh'}}>Happy Eating!</h3>
           <h4>
            - Logout -</h4>
         </Link>
