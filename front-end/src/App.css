@@ -23,7 +23,7 @@ a {
 }
 
 h1 {
-  font-family: 'Courgette', cursive;
+ 
   color: white;
   text-shadow: 0 0 1rem black;
 }
@@ -75,6 +75,7 @@ a:hover {
   background-position: center center;
   text-align: center;
   align-items: center; 
+  justify-content: center;
 }
 
 .btn {
