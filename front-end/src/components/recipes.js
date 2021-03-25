@@ -51,7 +51,7 @@ const Recipe = (props) => {
               }}
             >
               {" "}
-              <h3 style={{ margin: "3rem 0" }}>
+              <h3 style={{ margin: "3rem 0", justifySelf: 'center' }}>
                 <a href={data[idx].sourceUrl} style={{ color: "white" }}>
                   {data[idx].title}
                 </a>
