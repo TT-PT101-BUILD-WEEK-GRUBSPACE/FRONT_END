@@ -15,8 +15,8 @@ function App() {
   return (
     <Router>
       <div className="parallax-bg jumbotron" style={{ minHeight: "100vh" }}>
-        <div className="d-flex bg-light header flex-column justify-content-center">
-          <h1 style={{ fontSize: "5rem" }}>GRUBSPACE</h1>
+        <div className="d-flex bg-light header flex-column justify-content-center"style={{textAlign: 'center'}}>
+          <h1 style={{ fontSize: "5vw" }}>GRUBSPACE</h1>
           <h3>Find your next favorite dish today!</h3>
           <h5 style={{ color: "white" }}>
             Choose from over 5000 delicious recipes
