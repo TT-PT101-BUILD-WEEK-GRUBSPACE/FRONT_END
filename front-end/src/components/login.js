@@ -74,7 +74,7 @@ class Login extends React.Component {
           >
             Login
           </Button>
-          <Link to='signup'><em style={{color: 'white'}}>New User</em></Link>
+          <Link to='signup'><em style={{color: 'white'}}>New User?</em></Link>
         </form>
       </div>
     );

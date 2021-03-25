@@ -13,6 +13,9 @@ const Recipe = (props) => {
     root: {
       maxWidth: "50vw",
       alignSelf: "center",
+      padding: '3vh 5vw',
+      backgroundColor: '#222',
+      opacity: '0.9',
       "& > * + *": {
         marginTop: theme.spacing(2),
       },
@@ -23,9 +26,10 @@ const Recipe = (props) => {
 
   if (props.loading) {
     return (
-      <div className={classes.root}>
+      <div className={classes.root}> 
+        <h5 style={{color: 'white'}}>Your delicious results are on their way...</h5>
         <LinearProgress />
-        <LinearProgress />
+       
       </div>
     );
   }

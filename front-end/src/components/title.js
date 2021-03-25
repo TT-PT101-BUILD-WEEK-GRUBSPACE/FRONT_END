@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { searchValue, getRecipe } from "../actions";
 import Recipes from "./recipes";
 
+const initialState = '';
+
 const Title = (props) => {
-  const [searchValues, setSearchValues] = useState("");
+  const [searchValues, setSearchValues] = useState(initialState);
 
   const handleChanges = (e) => {
     //console.log("1. e.target.value from handleChanges", e.target.value);
@@ -29,8 +31,9 @@ const Title = (props) => {
       style={{ marginTop: "2rem", textAlign: "center" }}
     >
       <div className='d-flex justify-content-center flex-column content'>
-        <h1 style={{margin: '5vh 0'}}>Welcome to The Vault powered by Spoontacular</h1>
-        <h3>
+        <h1 style={{margin: '2.5vh 0'}}>Welcome to The Vault</h1>
+        <h4>Powered by Spoontacular</h4>
+        <p style={{marginTop: '2vh'}}>
           Search through Spoontacular's extensive database to find just the
           right flavor's you've been craving. With over 5000 recipes available
           at your fingertips, your friends, families, and loved one's will be
@@ -39,7 +42,7 @@ const Title = (props) => {
           <br/>
           Get started now by using the search bar
           below and get ready to salivate!
-        </h3>
+        </p>
       </div>
       <h3 style={{marginTop: '3vh'}}>Begin your journey here</h3>
       <form onSubmit={handleClick}>
