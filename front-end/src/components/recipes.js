@@ -13,9 +13,9 @@ const Recipe = (props) => {
     root: {
       maxWidth: "50vw",
       alignSelf: "center",
-      padding: '3vh 5vw',
-      backgroundColor: '#222',
-      opacity: '0.9',
+      padding: "3vh 5vw",
+      backgroundColor: "#222",
+      opacity: "0.9",
       "& > * + *": {
         marginTop: theme.spacing(2),
       },
@@ -26,14 +26,14 @@ const Recipe = (props) => {
 
   if (props.loading) {
     return (
-      <div className={classes.root}> 
-        <h5 style={{color: 'white'}}>Your delicious results are on their way...</h5>
+      <div className={classes.root}>
+        <h5 style={{ color: "white" }}>
+          Your delicious results are on their way...
+        </h5>
         <LinearProgress />
-       
       </div>
     );
-  }
-
+  } 
   return (
     <div className="d-flex container flex-row justify-content-center align-items-lg-center flex-wrap">
       {data &&
@@ -51,7 +51,7 @@ const Recipe = (props) => {
               }}
             >
               {" "}
-              <h3 style={{ margin: "3rem 0", justifySelf: 'center' }}>
+              <h3 style={{ margin: "3rem 0", justifySelf: "center" }}>
                 <a href={data[idx].sourceUrl} style={{ color: "white" }}>
                   {data[idx].title}
                 </a>

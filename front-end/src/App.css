@@ -86,6 +86,20 @@ a:hover {
   cursor: pointer;
 }
 
+.recipe-form {
+  background-color: white;
+  background: url('./images/recipeForm.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 75%;
+}
+
+.flexible-stretch-boxes {
+  background-color: #222;
+  opacity: 0.9;
+}
+
 /* 
 ========================
       BUTTON ONE

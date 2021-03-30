@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { searchValue, getRecipe } from "../actions";
 import Recipes from "./recipes";
 
-const initialState = '';
+const initialState = "";
 
 const Title = (props) => {
   const [searchValues, setSearchValues] = useState(initialState);
@@ -30,21 +30,21 @@ const Title = (props) => {
       className="d-flex justify-content-center flex-column"
       style={{ marginTop: "2rem", textAlign: "center" }}
     >
-      <div className='d-flex justify-content-center flex-column content'>
-        <h1 style={{margin: '2.5vh 0'}}>Welcome to The Vault</h1>
+      <div className="d-flex justify-content-center flex-column content">
+        <h1 style={{ margin: "2.5vh 0" }}>Welcome to The Vault</h1>
         <h4>Powered by Spoontacular</h4>
-        <p style={{marginTop: '2vh'}}>
+        <p style={{ marginTop: "2vh" }}>
           Search through Spoontacular's extensive database to find just the
           right flavor's you've been craving. With over 5000 recipes available
           at your fingertips, your friends, families, and loved one's will be
-          singing your praises for years to come. 
-          <br/>
-          <br/>
-          Get started now by using the search bar
-          below and get ready to salivate!
+          singing your praises for years to come.
+          <br />
+          <br />
+          Get started now by using the search bar below and get ready to
+          salivate!
         </p>
       </div>
-      <h3 style={{marginTop: '3vh'}}>Begin your journey here</h3>
+      <h3 style={{ marginTop: "3vh" }}>Begin your journey here</h3>
       <form onSubmit={handleClick}>
         <div>
           {" "}
@@ -64,10 +64,7 @@ const Title = (props) => {
             value={searchValues}
             onChange={handleChanges}
           />
-          <button
-            type="submit"
-            onClick={handleClick}
-          >
+          <button type="submit" onClick={handleClick}>
             Click
           </button>
         </div>

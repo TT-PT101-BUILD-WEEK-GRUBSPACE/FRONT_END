@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 
 class SignUp extends React.Component {
@@ -8,7 +8,7 @@ class SignUp extends React.Component {
     credentials: {
       username: "",
       password: "",
-      email:''
+      email: "",
     },
   };
 
@@ -44,9 +44,11 @@ class SignUp extends React.Component {
           className="d-flex justify-content-start flex-column"
           style={{ maxWidth: "30vw", textAlign: "center" }}
         >
-          <h5 style={{marginBottom: '8vh'}}>Start your culinary odyssey today! 
-          <br/>
-          Sign up now</h5>
+          <h5 style={{ marginBottom: "8vh" }}>
+            Start your culinary odyssey today!
+            <br />
+            Sign up now
+          </h5>
           <h5>- SIGN UP -</h5>
           <TextField
             type="text"
@@ -87,7 +89,11 @@ class SignUp extends React.Component {
           >
             Login
           </Button>
-          <Link to='login'><em style={{color: 'white'}}>Already have an account? Click Here.</em></Link>
+          <Link to="login">
+            <em style={{ color: "white" }}>
+              Already have an account? Click Here.
+            </em>
+          </Link>
         </form>
       </div>
     );
