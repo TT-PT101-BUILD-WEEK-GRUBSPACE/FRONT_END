@@ -11,10 +11,9 @@ const Logout = () => {
 
   return (
     <div
-      className="d-flex flex-column justify-content-between align-items-center"
+      className="d-flex flex-column justify-content-between align-items-center logout"
       style={{
-        minHeight: "20vh",
-        backgroundColor: "#222",
+        minHeight: "80vh",
         color: "white",
         textAlign: "center",
         padding: "8vh 3vw",
@@ -26,10 +25,12 @@ const Logout = () => {
         style={{
           margin: "5vh 0",
           fontSize: "5vh",
+          backgroundColor: '#222',
           color: "white",
           textDecoration: "none",
           border: ".05rem solid white",
           padding: "2rem 3rem",
+          opacity: '',
         }}
       >
         <h2>Thank you for visiting Grubspace.</h2>
