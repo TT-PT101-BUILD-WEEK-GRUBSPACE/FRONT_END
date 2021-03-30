@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 
 class Login extends React.Component {
@@ -8,7 +8,7 @@ class Login extends React.Component {
     credentials: {
       username: "",
       password: "",
-      email:''
+      email: "",
     },
   };
 
@@ -31,7 +31,9 @@ class Login extends React.Component {
         //console.log("Resolved Token Value", res.data.payload);
         localStorage.setItem("authToken", res.data.payload);
         // redirect to logged in homepage
-        alert('Welcome to your personal recipe box. Manage your recipes using the form below to get started')
+        alert(
+          "Welcome to your personal recipe box. Manage your recipes using the form below to get started"
+        );
         this.props.history.push("/user_recipes");
       })
       .catch((err) => console.log(err));
@@ -74,7 +76,9 @@ class Login extends React.Component {
           >
             Login
           </Button>
-          <Link to='signup'><em style={{color: 'white'}}>New User?</em></Link>
+          <Link to="signup">
+            <em style={{ color: "white" }}>New User?</em>
+          </Link>
         </form>
       </div>
     );
