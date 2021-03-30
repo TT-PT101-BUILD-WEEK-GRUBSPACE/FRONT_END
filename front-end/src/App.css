@@ -32,6 +32,11 @@ h1 {
   color: white
 }
 
+form {
+  max-width: 100%;
+  margin: 2vh auto;
+}
+
 
 
 
@@ -93,11 +98,14 @@ a:hover {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 75%;
+  text-align: center;
+  width: 50vw;
 }
 
 .flexible-stretch-boxes {
   background-color: #222;
-  opacity: 0.9;
+  opacity: 0.8; 
+  max-width: 95%;
 }
 
 .recipe-page {

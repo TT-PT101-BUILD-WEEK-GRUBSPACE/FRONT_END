@@ -65,16 +65,16 @@ export const getRecipe = (props) => (dispatch) => {
 export const addRecipe = (props) => (dispatch) => {
   console.log("10. addRecipe props from addRecipe action", props);
   dispatch({ type: CREATE_RECIPE_START });
-  axiosWithAuth
-    .post(
-      "[POST] RECIPE: https://secret-family-recipes-101.herokuapp.com/api/recipes"
-    )
-    .then((res) => {
-      dispatch({ type: CREATE_RECIPE_SUCCESS, payload: res.data.results });
-    })
-    .catch((error) => {
-      dispatch({ type: CREATE_RECIPE_FAILURE, payload: error });
-    });
+  // axiosWithAuth
+  //   .post(
+  //     "https://secret-family-recipes-101.herokuapp.com/api/recipes"
+  //   )
+  //   .then((res) => {
+  //     dispatch({ type: CREATE_RECIPE_SUCCESS, payload: res.data.results });
+  //   })
+  //   .catch((error) => {
+  //     dispatch({ type: CREATE_RECIPE_FAILURE, payload: error });
+  //   });
 };
 
 export const updateRecipe = (props) => (dispatch) => {
