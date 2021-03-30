@@ -42,9 +42,9 @@ class SignUp extends React.Component {
         <form
           onSubmit={this.login}
           className="d-flex justify-content-start flex-column"
-          style={{ maxWidth: "30vw", textAlign: "center" }}
+          style={{ maxWidth: "30vw", textAlign: "center", color: 'black' }}
         >
-          <h5 style={{ marginBottom: "8vh" }}>
+          <h5 style={{ marginBottom: "3vh" }}>
             Start your culinary odyssey today!
             <br />
             Sign up now
@@ -90,7 +90,7 @@ class SignUp extends React.Component {
             Login
           </Button>
           <Link to="login">
-            <em style={{ color: "white" }}>
+            <em style={{ color: "black" }}>
               Already have an account? Click Here.
             </em>
           </Link>
