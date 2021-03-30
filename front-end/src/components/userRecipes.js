@@ -1,45 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { recipeFormValues, addRecipe } from "../actions/index";
 import { Button, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from '../styles/styles'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import RecipeCard from "./recipeCard";
+import { initialFormState } from '../initialStates/initialStates'
 
-const initialFormState = {
-  user_id: "",
-  recipe_name: "",
-  recipe_source: "",
-  image_source: "",
-  category: "",
-  recipe_description: "",
-  ingredients: [],
-  instructions: [],
-};
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: "50vw",
-    alignSelf: "left",
-    padding: "3vh 5vw",
-    backgroundColor: "#222",
-    opacity: "0.9",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-  input: {
-    color: "white",
-    backgroundColor: "#AAA",
-  },
-  button: {
-    color: "black",
-    backgroundColor: "#FFF",
-    margin: "2vh 2vw",
-    maxWidth: "10rem",
-  },
-}));
 
 const UserRecipes = (props) => {
   const classes = useStyles();
@@ -51,10 +19,11 @@ const UserRecipes = (props) => {
       return (
         <TextField
           value={item}
+          key={idx}
           placeholder={`Ingredient ${idx + 1}`}
           onChange={(e) => updateIngredients(e, idx)}
           margin="dense"
-          color="inherit"
+ 
           className={classes.input}
         />
       );
@@ -82,10 +51,10 @@ const UserRecipes = (props) => {
       return (
         <TextField
           value={item}
+          key={idx}
           placeholder={`Step ${idx + 1}`}
           onChange={(e) => updateInstructions(e, idx)}
           margin="dense"
-          color="inherit"
           className={classes.input}
         />
       );
@@ -126,38 +95,31 @@ const UserRecipes = (props) => {
     });
   };
 
+  useEffect(() => {
+    props.addRecipe(props.formStateData);
+  }, [props]);
+
   return (
     <div
-      className="d-flex flex-row justify-content-center"
+      className={classes.outerDiv}
       name="outerDivContainer"
-      style={{ marginTop: "10vh" }}
     >
       <div
         className="recipe-form"
-        style={{
-          textAlign: "center",
-          width: "50vw",
-        }}
       >
         <div
           className="flexible-stretch-boxes d-flex justify-content-center flex-column"
-          style={{
-            opacity: "0.8",
-            maxWidth: "95%",
-            margin: "2vh auto",
-            boxShadow: "0 0 2vh #333",
-          }}
+          style={{margin: '2vh auto'}}
         >
-          <h4 style={{ marginTop: "3vh" }}>
+          <h4 className={classes.h4}>
             Welcome to your recipe box! <br /> <br />
             Add your favorite recipes and get started collecting today.
           </h4>
         </div>
         <form
-          className="d-flex align-items-center flex-column flex-wrap"
+          className="d-flex align-items-center flex-column flex-wrap form"
           id="recipeForm"
           onSubmit={handleSubmit}
-          style={{ maxWidth: "100%", margin: "2vh auto" }}
         >
           <TextField
             type="text"
@@ -168,10 +130,8 @@ const UserRecipes = (props) => {
             label="Recipe Name"
             placeholder="Recipe Name"
             margin="dense"
-            color="inherit"
             variant="outlined"
             className={classes.input}
-            style={{ boxShadow: "0 0 2vh #333" }}
           />
           <TextField
             type="text"
@@ -182,10 +142,9 @@ const UserRecipes = (props) => {
             label="Description"
             placeholder="Description"
             margin="dense"
-            color="inherit"
+
             variant="outlined"
             className={classes.input}
-            style={{ boxShadow: "0 0 2vh #333" }}
           />
           <TextField
             type="text"
@@ -196,10 +155,9 @@ const UserRecipes = (props) => {
             label="Image Source"
             placeholder="Image Source"
             margin="dense"
-            color="inherit"
+
             variant="outlined"
             className={classes.input}
-            style={{ boxShadow: "0 0 2vh #333" }}
           />
           <TextField
             type="text"
@@ -210,21 +168,20 @@ const UserRecipes = (props) => {
             label="Recipe Source"
             placeholder="Recipe Name"
             margin="dense"
-            color="inherit"
+
             variant="outlined"
             className={classes.input}
-            style={{ boxShadow: "0 0 2vh #333" }}
           />
           <div  
             className="flexible-stretch-boxes d-flex justify-content-center flex-column"
             style={{
-            opacity: "0.8",
-            minWidth: "95%",
+            padding: '2vh 4vw',
+            color: 'white',
+            fontSize: '3.5vh',
             margin: "2vh auto",
-            boxShadow: "0 0 2vh #333",}}>
+            }}>
             <label
               htmlFor="category"
-              style={{ margin: "3vh", fontSize: "4vh", color: 'white'}}
             >
               Meal Type
             </label>
@@ -233,12 +190,6 @@ const UserRecipes = (props) => {
             onChange={handleChange}
             value={formStateData.category}
             name="category"
-            style={{
-              backgroundColor: "#444",
-              color: "#FFF",
-              boxShadow: "0 0 2vh #333",
-              margin: '2vh 0'
-            }}
           >
             <option id="">---Select category---</option>
             <option id="">--Meal Period--</option>
@@ -283,7 +234,6 @@ const UserRecipes = (props) => {
               <Button
                 onClick={addIngredient}
                 className={classes.button}
-                color="inherit"
                 size="medium"
                 variant="outlined"
               >
@@ -301,8 +251,8 @@ const UserRecipes = (props) => {
               <Button
                 onClick={addStep}
                 className={classes.button}
-                color="inherit"
                 size="medium"
+                color='default'
                 variant="outlined"
               >
                 + Instruction
@@ -311,7 +261,6 @@ const UserRecipes = (props) => {
           </div>
           <Button
             className={classes.button}
-            color="inherit"
             size="medium"
             variant="outlined"
             style={{ boxShadow: "0 0 2vh #333" }}
