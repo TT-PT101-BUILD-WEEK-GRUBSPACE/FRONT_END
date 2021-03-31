@@ -22,15 +22,15 @@ class SignUp extends React.Component {
     });
   };
 
-  login = (e) => {
-    //console.log("login fired", e);
+  signUp = (e) => {
+    console.log("login fired", e);
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/signup", this.state.credentials)
+      .post("https://secret-family-recipes-101.herokuapp.com/api/users/register", this.state.credentials)
       .then((res) => {
-        //console.log("Resolved Token Value", res.data.payload);
+        console.log("Resolved Token Value", res.data.payload);
         localStorage.setItem("authToken", res.data.payload);
-        // redirect to logged in homepage
+        //redirect to logged in homepage
         this.props.history.push("/protected");
       })
       .catch((err) => console.log(err));
@@ -40,7 +40,7 @@ class SignUp extends React.Component {
     return (
       <div className="content" style={{ textAlign: "right" }}>
         <form
-          onSubmit={this.login}
+          onSubmit={this.signUp}
           className="d-flex justify-content-start flex-column"
           style={{ maxWidth: "30vw", textAlign: "center", color: 'black' }}
         >
@@ -84,7 +84,7 @@ class SignUp extends React.Component {
             style={{ backgroundColor: "white" }}
           />
           <Button
-            onClick={this.login}
+            onClick={this.signUp}
             style={{ color: "white", border: ".5px solid white" }}
           >
             Login

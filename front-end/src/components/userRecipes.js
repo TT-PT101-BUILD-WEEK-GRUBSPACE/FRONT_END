@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { recipeFormValues, addRecipe } from "../actions/index";
 import { Button, TextField } from "@material-ui/core";
 import useStyles from '../styles/styles'
 import { axiosWithAuth } from "../utils/axiosWithAuth";
@@ -95,8 +93,8 @@ const UserRecipes = (props) => {
     });
   };
 
-  useEffect(() => {
-    props.addRecipe(props.formStateData);
+  useEffect((props) => {
+    //props.addRecipe(props.formStateData);
   }, [props]);
 
   return (
@@ -299,24 +297,8 @@ const UserRecipes = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  addRecipe(state.recipeFormValues);
-  console.log("state mapped from title", state);
-  return {
-    user_id: state.user_id,
-    recipe_name: state.recipe_name,
-    recipe_description: state.recipe_description,
-    recipe_source: state.recipe_source,
-    image_source: state.image_source,
-    ingredients: state.ingredients,
-    category_id: state.category_id,
-    instructions: state.instructions,
-  };
-};
 
-const mapDispatchToProps = {
-  recipeFormValues,
-  addRecipe,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRecipes);
+
+
+export default UserRecipes
