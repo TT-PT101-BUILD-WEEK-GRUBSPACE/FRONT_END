@@ -9,7 +9,8 @@ import SignUp from './components/signup'
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
-import UserRecipes from "./components/userRecipes";
+import UserRecipes from './components/userRecipes'
+
 
 function App() {
   return (
