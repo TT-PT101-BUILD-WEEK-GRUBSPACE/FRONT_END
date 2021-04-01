@@ -2,7 +2,7 @@ import axios from "axios";
 
  const axiosWithAuth = () => {
   //console.log('axiosWithAuth Started')
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
   //console.log(token)
   return axios.create({
     

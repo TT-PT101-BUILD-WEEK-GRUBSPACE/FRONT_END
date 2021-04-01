@@ -87,7 +87,7 @@ const UserRecipes = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formStateData)
-    axiosWithAuth
+    axiosWithAuth()
       .post(
         "https://secret-famiily-recipes-101.herokuapp.com/api/recipes", formStateData
       )
@@ -95,7 +95,10 @@ const UserRecipes = (props) => {
         console.log(res.data);
         setFormStateData(initialFormState);
         history.push("/user_recipes");
-      });
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   };
 
 
