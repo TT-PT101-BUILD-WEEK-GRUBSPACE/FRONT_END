@@ -18,7 +18,7 @@ export default function RecipeBox() {
           error
         );
       });
-  }, [recipes]);
+  }, [false]);
 
   return (
     <div>

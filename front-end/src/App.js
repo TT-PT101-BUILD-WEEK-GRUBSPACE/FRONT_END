@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Title from "./components/title";
-import Home from "./components/home";
+//import Home from "./components/home";
 import { AppBar } from "@material-ui/core";
 import Login from "./components/login";
 import Logout from "./components/logout";
@@ -22,13 +22,12 @@ function App() {
           <h5 style={{ color: "white" }}>
             Choose from over 5000 delicious recipes
           </h5>
-          <h6>Head to our Recipe page to get started or Login to access your recipe box.</h6>
+          <h6>Head to The Vault to get started or Login to access your recipe box.</h6>
         </div>
         <div className="container d-flex justify-content-center flex-column">
           <AppBar
             className="d-flex justify-content-center flex-row"
             color="inherit"
-            position='sticky'
             style={{
               marginBottom: '10vh'
             }}
