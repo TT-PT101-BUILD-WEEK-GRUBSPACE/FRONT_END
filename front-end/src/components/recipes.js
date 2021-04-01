@@ -33,7 +33,7 @@ const Recipe = (props) => {
         <LinearProgress />
       </div>
     );
-  } 
+  }
   return (
     <div className="d-flex container flex-row justify-content-center align-items-lg-center flex-wrap">
       {data &&

@@ -22,6 +22,7 @@ function App() {
           <h5 style={{ color: "white" }}>
             Choose from over 5000 delicious recipes
           </h5>
+          <h6>Head to our Recipe page to get started or Login to access your recipe box.</h6>
         </div>
         <div className="container d-flex justify-content-center flex-column">
           <AppBar
@@ -32,14 +33,12 @@ function App() {
               marginBottom: '10vh'
             }}
           >
-            <Link to="home">Home</Link>
             <Link to="recipes">The Vault</Link>
             <Link to="login">Sign Up/ Login</Link>
             <Link to="logout">Logout</Link>
             <Link to="user_recipes">Recipe Box</Link>
           </AppBar>
           <Switch>
-            <Route path="/home" component={Home} />
             <Route path="/recipes" component={Title} />
             <Route path="/login" component={Login} />
             <Route path="/logout" component={Logout} />
