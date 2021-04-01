@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, LinearProgress, TextField } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../utils/Auth";
-import { userLogin } from "../actions/login";
 import signUpSchema from "./signUpSchema";
 import loginSchema from "./loginSchema";
 import initialFormErrors from "../initialStates/initialFormErrors";
@@ -13,7 +11,7 @@ import * as yup from "yup";
 const Login = () => {
   const history = useHistory();
 
-  //const { dispatch } = useContext(AuthContext);
+ 
 
   const initialState = {
     username: "",
@@ -54,7 +52,7 @@ const Login = () => {
 
         .validate(e.target.name)
         .then((valid) => {
-          console.log(valid);
+          //console.log(valid);
           setErrors({
             ...formErrors,
             [e.target.name]: "",

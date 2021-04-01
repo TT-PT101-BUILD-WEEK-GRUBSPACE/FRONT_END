@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
-import useStyles from '../styles/styles'
-import { axiosWithAuth } from "../utils/axiosWithAuth";
-import RecipeCard from "./recipeCard";
-import { initialFormState } from '../initialStates/initialStates'
-
+import useStyles from "../styles/styles";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import RecipeBox from "./recipeBox";
+import { initialFormState } from "../initialStates/initialStates";
 
 const UserRecipes = (props) => {
   const classes = useStyles();
   let history = useHistory();
   const [formStateData, setFormStateData] = useState(initialFormState);
 
+  //FORM CONSTRUCTORS
+  
   const addIngredientInputs = () => {
     return formStateData.ingredients.map((item, idx) => {
       return (
         <TextField
-          value={item}
+          value={formStateData.ingredient}
           key={idx}
           placeholder={`Ingredient ${idx + 1}`}
           onChange={(e) => updateIngredients(e, idx)}
           margin="dense"
- 
           className={classes.input}
         />
       );
@@ -48,7 +48,7 @@ const UserRecipes = (props) => {
     return formStateData.instructions.map((item, idx) => {
       return (
         <TextField
-          value={item}
+          value={formStateData.instruction}
           key={idx}
           placeholder={`Step ${idx + 1}`}
           onChange={(e) => updateInstructions(e, idx)}
@@ -75,39 +75,36 @@ const UserRecipes = (props) => {
     });
   };
 
+  //CHANGE HANDLERS
   const handleChange = (e) => {
-    e.persist();
-    const newPopulatedForm = {
+    setFormStateData({
       ...formStateData,
       [e.target.name]: e.target.value,
-    };
-    setFormStateData(newPopulatedForm);
+    });
+    console.log(formStateData)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosWithAuth.post().then((res) => {
-      console.log(res.data);
-      setFormStateData(initialFormState);
-      history.push("/");
-    });
+    console.log(formStateData)
+    axiosWithAuth
+      .post(
+        "https://secret-famiily-recipes-101.herokuapp.com/api/recipes", formStateData
+      )
+      .then((res) => {
+        console.log(res.data);
+        setFormStateData(initialFormState);
+        history.push("/user_recipes");
+      });
   };
 
-  useEffect((props) => {
-    //props.addRecipe(props.formStateData);
-  }, [props]);
 
   return (
-    <div
-      className={classes.outerDiv}
-      name="outerDivContainer"
-    >
-      <div
-        className="recipe-form"
-      >
+    <div className={classes.outerDiv} name="outerDivContainer">
+      <div className="recipe-form">
         <div
           className="flexible-stretch-boxes d-flex justify-content-center flex-column"
-          style={{margin: '2vh auto'}}
+          style={{ margin: "2vh auto" }}
         >
           <h4 className={classes.h4}>
             Welcome to your recipe box! <br /> <br />
@@ -140,7 +137,6 @@ const UserRecipes = (props) => {
             label="Description"
             placeholder="Description"
             margin="dense"
-
             variant="outlined"
             className={classes.input}
           />
@@ -153,7 +149,6 @@ const UserRecipes = (props) => {
             label="Image Source"
             placeholder="Image Source"
             margin="dense"
-
             variant="outlined"
             className={classes.input}
           />
@@ -166,52 +161,47 @@ const UserRecipes = (props) => {
             label="Recipe Source"
             placeholder="Recipe Name"
             margin="dense"
-
             variant="outlined"
             className={classes.input}
           />
-          <div  
+          <div
             className="flexible-stretch-boxes d-flex justify-content-center flex-column"
             style={{
-            padding: '2vh 4vw',
-            color: 'white',
-            fontSize: '3.5vh',
-            margin: "2vh auto",
-            }}>
-            <label
-              htmlFor="category"
-            >
-              Meal Type
-            </label>
+              padding: "2vh 4vw",
+              color: "white",
+              fontSize: "3.5vh",
+              margin: "2vh auto",
+            }}
+          >
+            <label htmlFor="category">Meal Type</label>
           </div>
           <select
             onChange={handleChange}
-            value={formStateData.category}
             name="category"
           >
-            <option id="">---Select category---</option>
-            <option id="">--Meal Period--</option>
-            <option id="1">Breakfast</option>
-            <option id="2">Lunch</option>
-            <option id="3">Dinner</option>
-            <option id="4">Desserts</option>
-            <option id="">--Dishes--</option>
-            <option id="5">Soup</option>
-            <option id="6">Salad</option>
-            <option id="7">Appetizers</option>
-            <option id="8">Main Dishes: Beef</option>
-            <option id="9">Main Dishes: Poultry</option>
-            <option id="10">Main Dishes: Pork</option>
-            <option id="11">Main Dishes: Seafood</option>
-            <option id="12">Main Dishes: Vegetarian/ Vegan</option>
-            <option id="13">Side Dishes: Vegetables</option>
-            <option id="14">Side Dishes: Other</option>
-            <option id="">--Other/ Misc--</option>
-            <option id="15">Canning and Freezing</option>
-            <option id="16">Breads</option>
-            <option id="17">Holidays/ Events</option>
-            <option id="18">Get Togethers</option>
-            <option id="19">Beverages</option>
+            <option value="">---Select category---</option>
+            <option value="">--Meal Period--</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="desserts">Desserts</option>
+            <option value="">--Dishes--</option>
+            <option value="soup">Soup</option>
+            <option value="salad">Salad</option>
+            <option value="appetizers">Appetizers</option>
+            <option value="Mains: Beef">Main Dishes: Beef</option>
+            <option value='Mains: Poultry'>Main Dishes: Poultry</option>
+            <option value="Mains: Pork">Main Dishes: Pork</option>
+            <option value="Mains: Seafood">Main Dishes: Seafood</option>
+            <option value="vegetarian/ vegan">Main Dishes: Vegetarian/ Vegan</option>
+            <option value="Sides: Vegetables">Side Dishes: Vegetables</option>
+            <option value="Sides: Other">Side Dishes: Other</option>
+            <option value="">--Other/ Misc--</option>
+            <option value='Canning and Freezing'>Canning and Freezing</option>
+            <option value="16">Breads</option>
+            <option value="17">Holidays/ Events</option>
+            <option value="18">Get Togethers</option>
+            <option value="19">Beverages</option>
           </select>
           <div
             className="d-flex flex-row flex-wrap justify-content-center"
@@ -223,9 +213,12 @@ const UserRecipes = (props) => {
           >
             <div
               className="d-flex flex-column justify-content-start flexible-stretch-boxes"
-              style={{border: '.5px solid white'}}
+              style={{ border: ".5px solid white" }}
             >
-              <label htmlFor="ingredients" style={{ color: "white", margin: '3vh 0'}}>
+              <label
+                htmlFor="ingredients"
+                style={{ color: "white", margin: "3vh 0" }}
+              >
                 -Ingredients-
               </label>
               {addIngredientInputs()}
@@ -240,9 +233,12 @@ const UserRecipes = (props) => {
             </div>
             <div
               className="d-flex flex-column justify-content-start flexible-stretch-boxes"
-              style={{border: '.5px solid white'}}
+              style={{ border: ".5px solid white" }}
             >
-              <label htmlFor="directions" style={{ color: "white", margin: '3vh 0'}}>
+              <label
+                htmlFor="directions"
+                style={{ color: "white", margin: "3vh 0" }}
+              >
                 -Instructions-
               </label>
               {createInstructionsInputs()}
@@ -250,7 +246,7 @@ const UserRecipes = (props) => {
                 onClick={addStep}
                 className={classes.button}
                 size="medium"
-                color='default'
+                color="default"
                 variant="outlined"
               >
                 + Instruction
@@ -259,6 +255,7 @@ const UserRecipes = (props) => {
           </div>
           <Button
             className={classes.button}
+            type='submit'
             size="medium"
             variant="outlined"
             style={{ boxShadow: "0 0 2vh #333" }}
@@ -291,14 +288,10 @@ const UserRecipes = (props) => {
           </h5>
         </div>
 
-        <RecipeCard recipes={props} />
+        <RecipeBox />
       </div>
     </div>
   );
 };
 
-
-
-
-
-export default UserRecipes
+export default UserRecipes;

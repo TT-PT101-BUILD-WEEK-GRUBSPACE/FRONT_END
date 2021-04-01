@@ -1,10 +1,10 @@
 export const initialFormState = {
-    user_id: "",
-    recipe_name: "",
-    recipe_source: "",
+    id: Date.now(),
+    recipe_name: "", 
     image_source: "",
-    category: "",
+    recipe_source: "",
     recipe_description: "",
+    category_name: "",
     ingredients: [],
     instructions: [],
   };
