@@ -62,7 +62,7 @@ const Title = (props) => {
                 color: "lightblue",
                 textAlign: "center",
                 fontSize: "1.25rem",
-                margin: "3vh",
+                margin: "3vh auto",
               }}
               value={searchValues}
               onChange={handleChanges}
