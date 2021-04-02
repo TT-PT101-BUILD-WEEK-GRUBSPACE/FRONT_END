@@ -28,9 +28,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     flexDirection: "row",
   },
-  h4: {
-    marginTop: "3vh",
-  },
+
   label: {
     margin: "3vh 0",
     color: "white",
