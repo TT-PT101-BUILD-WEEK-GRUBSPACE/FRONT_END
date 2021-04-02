@@ -13,10 +13,11 @@ const Logout = () => {
     <div
       className="d-flex flex-column justify-content-between align-items-center logout"
       style={{
+        marginTop: '40vh',
         minHeight: "80vh",
         color: "white",
         textAlign: "center",
-        padding: "8vh 3vw",
+        padding: "23vh 3vw",
         opacity: "0.9",
       }}
     >

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, LinearProgress, TextField } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { useHistory, Link } from "react-router-dom";
+import noAuthAxios from "../utils/axios";
 import signUpSchema from "./signUpSchema";
 import loginSchema from "./loginSchema";
 import initialState from "../initialStates/initialCredentials";
@@ -77,9 +77,9 @@ const Login = () => {
     setFetching(true);
     if (login) {
       console.log(user);
-      axios
+      noAuthAxios()
         .post(
-          "https://secret-family-recipes-101.herokuapp.com/api/users/login",
+          "/login",
           user
         )
         .then((res) => {
@@ -104,15 +104,15 @@ const Login = () => {
         });
     } else {
       console.log(user);
-      axios
+      noAuthAxios()
         .post(
-          "https://secret-family-recipes-101.herokuapp.com/api/users/register",
+          "/register",
           initialState
         )
         .then(({ res }) => {
           //dispatch(userLogin(data));
           console.log("Resolved Token Value", res.data.payload);
-          localStorage.setItem("authToken", res.data.payload);
+          localStorage.setItem("token", res.data.payload);
           setLogin(login);
           history.push("/user_recipes");
           setFetching(false);
@@ -132,11 +132,12 @@ const Login = () => {
     <>
       <form
         className="login d-flex justify-content center flex-column align-items-center"
+        style={{ minHeight: '60vh', marginTop: '30vh'}}
         onSubmit={onSubmit}
       >
         <div
           className="d-flex flex-column justify-content-center align-items-center"
-          style={{ margin: "auto", padding: "10vh 10vw" }}
+          style={{ padding: "17vh 10vw" }}
         >
           <h2
             className="display-4"
@@ -174,7 +175,7 @@ const Login = () => {
           )}
           <TextField
             name="user_password"
-            type="text"
+            type="password"
             value={user.user_password}
             onChange={handleChange}
             variant="outlined"
@@ -195,15 +196,14 @@ const Login = () => {
             {login ? "Login" : "Sign Up"}
           </Button>
           {fetching ? <LinearProgress color="secondary" /> : <></>}
-          <Button
+          <Link
             size="small"
             variant="contained"
             onClick={() => setLogin(!login)}
-            className="btn btn-one"
-            style={{ boxShadow: "0 0 2vh black" }}
+            style={{color: 'black'}}
           >
-            {login ? "Sign Up" : "Log In"}
-          </Button>
+           <em> {login ? "New User? Sign Up Today" : "Already have an account? Log In Here"} </em>
+          </Link>
         </div>
       </form>
     </>

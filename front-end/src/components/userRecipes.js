@@ -22,22 +22,36 @@ const UserRecipes = (props) => {
   const addIngredientInputs = () => {
     return formValues.ingredients.map((item, idx) => {
       return (
-        <TextField
-          name="ingredient"
-          value={formValues.ingredients.ingredient_name}
-          key={idx}
-          placeholder={`Ingredient ${idx + 1}`}
-          onChange={(e) => updateIngredients(e, idx)}
-          margin="dense"
-          className={classes.input}
-        />
+        <div className='d-flex flex-row justify-content-center'>
+          <TextField
+            name="ingredient"
+            value={item.ingredient_name}
+            key={idx}
+            placeholder={`Ingredient ${idx + 1}`}
+            onChange={(e) => updateIngredients(e, { idx, key: 'ingredient_name' })}
+            margin="dense"
+            className={classes.input}
+          />
+          <TextField
+            name="ingredient"
+            value={item.quantity}
+            key={`quantity-${idx}`}
+            placeholder="Quantity"
+            onChange={(e) => updateIngredients(e, { idx, key: 'quantity' })}
+            margin="dense"
+            className={classes.input}
+          />
+        </div>
       );
     });
   };
 
-  const updateIngredients = (e, idx) => {
+  const updateIngredients = (e, { idx, key }) => {
     const formCopy = { ...formValues };
-    formCopy.ingredients[idx] = e.target.value;
+    formCopy.ingredients[idx] = {
+      ...formCopy.ingredients[idx],
+      [key]: e.target.value,
+    };
     setFormValues(formCopy);
   };
 
@@ -69,7 +83,10 @@ const UserRecipes = (props) => {
 
   const updateInstructions = (e, idx) => {
     const formCopyInstructions = { ...formValues };
-    formCopyInstructions.instructions[idx] = e.target.value;
+    formCopyInstructions.instructions[idx] = {
+      instruction: e.target.value,
+      step_number: idx + 1
+    };
     setFormValues(formCopyInstructions);
   };
 
@@ -86,7 +103,7 @@ const UserRecipes = (props) => {
   const postNewRecipe = (newRecipe) => {
     axiosWithAuth()
       .post(
-        "https://secret-family-recipes-101.herokuapp.com/api/recipes",
+        "/recipes",
         newRecipe
       )
       .then((res) => {
@@ -98,7 +115,6 @@ const UserRecipes = (props) => {
       })
       .catch((error) => {
         console.log(error);
-        debugger;
       });
   };
 
@@ -119,21 +135,11 @@ const UserRecipes = (props) => {
       recipe_name: formValues.recipe_name,
       recipe_description: formValues.recipe_description,
       recipe_source: formValues.recipe_source,
-      user_id: 1,
+      user_id: 0,
       image_source: formValues.image_source,
       category_id: formValues.category_id,
-      ingredients: [
-        {
-          ingredient_name: formValues.ingredients.ingredient_name,
-          quantity: formValues.quantity,
-        },
-      ],
-      instructions: [
-        {
-          instruction: formValues.instructions.instruction,
-          step_number: formValues.instructions.step_number,
-        },
-      ],
+      ingredients: formValues.ingredients,
+      instructions: formValues.instructions,
     };
 
     postNewRecipe(newRecipe);
