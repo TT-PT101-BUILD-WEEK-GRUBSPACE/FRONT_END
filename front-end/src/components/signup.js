@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Button, TextField } from "@material-ui/core";
+import { Button, Input, TextField } from "@material-ui/core";
 
 class SignUp extends React.Component {
   state = {
@@ -64,7 +64,7 @@ class SignUp extends React.Component {
             color="primary"
             style={{ backgroundColor: "white" }}
           />
-          <TextField
+          <Input
             type="password"
             name="password"
             value={this.state.credentials.password}

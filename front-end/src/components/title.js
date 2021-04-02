@@ -28,11 +28,11 @@ const Title = (props) => {
   return (
     <div
       className="d-flex justify-content-center flex-column recipe-page"
-      style={{ marginTop: "2rem", textAlign: "center" }}
+      style={{ marginTop: "20vh", textAlign: "center" }}
     >
       <div
         className="d-flex justify-content-center flex-column"
-        style={{ opacity: "0.95", minHeight: "80vh", padding: "5vw" }}
+        style={{ opacity: "0.95", minHeight: "80vh", padding: "2vh 5vw" }}
       >
         <h1 style={{ margin: "2.5vh 0" }}>Welcome to The Vault</h1>
         <h4>Powered by Spoonacular</h4>

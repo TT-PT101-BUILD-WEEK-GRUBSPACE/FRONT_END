@@ -9,8 +9,7 @@ const signUpSchema = yup.object().shape({
   user_password: yup
     .string()
     .required("please choose a password")
-    .min(6, "please choose a password between 6-8 characters long")
-    .max(8, "please choose a password between 6-8 characters long"),
+    .min(6, "please choose a password between 6-12 characters long")
 });
 
 export default signUpSchema;

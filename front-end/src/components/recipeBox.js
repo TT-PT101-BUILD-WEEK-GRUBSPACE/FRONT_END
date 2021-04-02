@@ -7,7 +7,7 @@ export default function RecipeBox() {
   const ghost = "";
   useEffect(() => {
     axiosWithAuth()
-      .get("https://secret-family-recipes-101.herokuapp.com/api/recipes")
+      .get("https://secret-family-recipes-101.herokuapp.com/api/recipes/")
       .then((res) => {
         setRecipes(res.data);
         console.log(res.data);
