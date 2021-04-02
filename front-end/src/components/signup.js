@@ -26,7 +26,10 @@ class SignUp extends React.Component {
     console.log("login fired", e);
     e.preventDefault();
     axios
-      .post("https://secret-family-recipes-101.herokuapp.com/api/users/register", this.state.credentials)
+      .post(
+        "https://secret-family-recipes-101.herokuapp.com/api/users/register",
+        this.state.credentials
+      )
       .then((res) => {
         console.log("Resolved Token Value", res.data.payload);
         localStorage.setItem("authToken", res.data.payload);
@@ -42,7 +45,7 @@ class SignUp extends React.Component {
         <form
           onSubmit={this.signUp}
           className="d-flex justify-content-start flex-column"
-          style={{ maxWidth: "30vw", textAlign: "center", color: 'black' }}
+          style={{ maxWidth: "30vw", textAlign: "center", color: "black" }}
         >
           <h5 style={{ marginBottom: "3vh" }}>
             Start your culinary odyssey today!

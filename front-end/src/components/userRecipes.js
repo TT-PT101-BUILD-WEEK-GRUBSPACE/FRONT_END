@@ -4,20 +4,27 @@ import { Button, TextField } from "@material-ui/core";
 import useStyles from "../styles/styles";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import RecipeBox from "./recipeBox";
-import { initialFormState } from "../initialStates/initialStates";
+import { initialFormValues } from "../initialStates/initialStates";
 
 const UserRecipes = (props) => {
   const classes = useStyles();
   let history = useHistory();
-  const [formStateData, setFormStateData] = useState(initialFormState);
+  //const isDisabled = false;
+
+  const [recipe, setRecipe] = useState({});
+  const [formValues, setFormValues] = useState(initialFormValues);
+  //const [disabled, setDisabled] = useState(isDisabled);
+
+  //console.log(recipe, disabled, history, formValues)
 
   //FORM CONSTRUCTORS
-  
+
   const addIngredientInputs = () => {
-    return formStateData.ingredients.map((item, idx) => {
+    return formValues.ingredients.map((item, idx) => {
       return (
         <TextField
-          value={formStateData.ingredient}
+          name="ingredient"
+          value={formValues.ingredients.ingredient_name}
           key={idx}
           placeholder={`Ingredient ${idx + 1}`}
           onChange={(e) => updateIngredients(e, idx)}
@@ -29,87 +36,119 @@ const UserRecipes = (props) => {
   };
 
   const updateIngredients = (e, idx) => {
-    const formCopy = { ...formStateData };
+    const formCopy = { ...formValues };
     formCopy.ingredients[idx] = e.target.value;
-    setFormStateData(formCopy);
+    setFormValues(formCopy);
   };
 
   const addIngredient = (e) => {
     e.preventDefault();
-    setFormStateData(() => {
+    setFormValues(() => {
       return {
-        ...formStateData,
-        ingredients: [...formStateData.ingredients, ""],
+        ...formValues,
+        ingredients: [...formValues.ingredients, ""],
       };
     });
   };
 
   const createInstructionsInputs = () => {
-    return formStateData.instructions.map((item, idx) => {
+    return formValues.instructions.map((item, idx) => {
       return (
-        <TextField
-          value={formStateData.instruction}
-          key={idx}
-          placeholder={`Step ${idx + 1}`}
-          onChange={(e) => updateInstructions(e, idx)}
-          margin="dense"
-          className={classes.input}
-        />
+        <div key={idx}>
+          <TextField
+            value={formValues.instruction}
+            placeholder={`Step ${idx + 1}`}
+            onChange={(e) => updateInstructions(e, idx)}
+            margin="dense"
+            className={classes.input}
+          />
+        </div>
       );
     });
   };
 
   const updateInstructions = (e, idx) => {
-    const formCopyInstructions = { ...formStateData };
+    const formCopyInstructions = { ...formValues };
     formCopyInstructions.instructions[idx] = e.target.value;
-    setFormStateData(formCopyInstructions);
+    setFormValues(formCopyInstructions);
   };
 
   const addStep = (e) => {
     e.preventDefault();
-    setFormStateData(() => {
-      return {
-        ...formStateData,
-        instructions: [...formStateData.instructions, ""],
-      };
-    });
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      instructions: [...formValues.instructions, formValues],
+    }));
   };
 
   //CHANGE HANDLERS
+
+  const postNewRecipe = (newRecipe) => {
+    axiosWithAuth()
+      .post(
+        "https://secret-family-recipes-101.herokuapp.com/api/recipes",
+        newRecipe
+      )
+      .then((res) => {
+        setRecipe(res.data);
+        console.log(recipe)
+        console.log("API USAGE SUCCESSFUL", res.data);
+        setFormValues(initialFormValues);
+        history.push("/user_recipes");
+      })
+      .catch((error) => {
+        console.log(error);
+        debugger;
+      });
+  };
+
   const handleChange = (e) => {
-    setFormStateData({
-      ...formStateData,
-      [e.target.name]: e.target.value,
-    });
-    console.log(formStateData)
+    const { name, value } = e.target;
+    setFormValues((prevFormValue) => ({
+      ...prevFormValue,
+      [name]: value,
+    }));
+    console.log(formValues);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formStateData)
-    axiosWithAuth()
-      .post(
-        "https://secret-famiily-recipes-101.herokuapp.com/api/recipes", formStateData
-      )
-      .then((res) => {
-        console.log(res.data);
-        setFormStateData(initialFormState);
-        history.push("/user_recipes");
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  };
+    console.log(formValues);
 
+    const newRecipe = {
+      recipe_name: formValues.recipe_name,
+      recipe_description: formValues.recipe_description,
+      recipe_source: formValues.recipe_source,
+      user_id: 1,
+      image_source: formValues.image_source,
+      category_id: formValues.category_id,
+      ingredients: [
+        {
+          ingredient_name: formValues.ingredients.ingredient_name,
+          quantity: formValues.quantity,
+        },
+      ],
+      instructions: [
+        {
+          instruction: formValues.instructions.instruction,
+          step_number: formValues.instructions.step_number,
+        },
+      ],
+    };
+
+    postNewRecipe(newRecipe);
+    alert("Your Recipe Has Been Added To YOur Recipe Box");
+    setFormValues(initialFormValues);
+  };
 
   return (
     <div className={classes.outerDiv} name="outerDivContainer">
-      <div className="recipe-form">
+      <div className="recipe-form d-flex justify-content-start flex-column">
         <div
           className="flexible-stretch-boxes d-flex justify-content-center flex-column"
-          style={{ margin: "2vh auto" }}
+          style={{ margin: "2vh auto", maxWidth: "30vw", textSelf: "center" }}
         >
-          <h4 className={classes.h4}>
+          <h4 className={classes.h4} style={{ alignSelf: "center" }}>
             Welcome to your recipe box! <br /> <br />
             Add your favorite recipes and get started collecting today.
           </h4>
@@ -123,7 +162,7 @@ const UserRecipes = (props) => {
             type="text"
             name="recipe_name"
             id="recipe_name"
-            value={formStateData.recipe_name}
+            value={formValues.recipe_name}
             onChange={handleChange}
             label="Recipe Name"
             placeholder="Recipe Name"
@@ -135,7 +174,7 @@ const UserRecipes = (props) => {
             type="text"
             name="recipe_description"
             id="recipe_description"
-            value={formStateData.recipe_description}
+            value={formValues.recipe_description}
             onChange={handleChange}
             label="Description"
             placeholder="Description"
@@ -147,7 +186,7 @@ const UserRecipes = (props) => {
             type="text"
             name="image_source"
             id="image_source"
-            value={formStateData.image_source}
+            value={formValues.image_source}
             onChange={handleChange}
             label="Image Source"
             placeholder="Image Source"
@@ -159,7 +198,7 @@ const UserRecipes = (props) => {
             type="text"
             name="recipe_source"
             id="recipe_source"
-            value={formStateData.recipe_source}
+            value={formValues.recipe_source}
             onChange={handleChange}
             label="Recipe Source"
             placeholder="Recipe Name"
@@ -176,42 +215,39 @@ const UserRecipes = (props) => {
               margin: "2vh auto",
             }}
           >
-            <label htmlFor="category">Meal Type</label>
+            <label htmlFor="category_id">Meal Type</label>
           </div>
-          <select
-            onChange={handleChange}
-            name="category"
-          >
-            <option value="">---Select category---</option>
+          <select onChange={handleChange} name="category_id">
+            <option>---Select category---</option>
             <option value="">--Meal Period--</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="desserts">Desserts</option>
+            <option value={1}>Breakfast</option>
+            <option value={2}>Lunch</option>
+            <option value={14}>Desserts</option>
             <option value="">--Dishes--</option>
-            <option value="soup">Soup</option>
-            <option value="salad">Salad</option>
-            <option value="appetizers">Appetizers</option>
-            <option value="Mains: Beef">Main Dishes: Beef</option>
-            <option value='Mains: Poultry'>Main Dishes: Poultry</option>
-            <option value="Mains: Pork">Main Dishes: Pork</option>
-            <option value="Mains: Seafood">Main Dishes: Seafood</option>
-            <option value="vegetarian/ vegan">Main Dishes: Vegetarian/ Vegan</option>
-            <option value="Sides: Vegetables">Side Dishes: Vegetables</option>
-            <option value="Sides: Other">Side Dishes: Other</option>
+            <option value={5}>Soup</option>
+            <option value={6}>Salad</option>
+            <option value={4}>Appetizers</option>
+            <option value={7}>Main Dishes: Beef</option>
+            <option value={8}>Main Dishes: Poultry</option>
+            <option value={9}>Main Dishes: Pork</option>
+            <option value={10}>Main Dishes: Seafood</option>
+            <option value={11}>Main Dishes: Vegetarian/ Vegan</option>
+            <option value={12}>Side Dishes: Vegetables</option>
+            <option value={13}>Side Dishes: Other</option>
             <option value="">--Other/ Misc--</option>
-            <option value='Canning and Freezing'>Canning and Freezing</option>
-            <option value="16">Breads</option>
-            <option value="17">Holidays/ Events</option>
-            <option value="18">Get Togethers</option>
-            <option value="19">Beverages</option>
+            <option value={15}>Canning and Freezing</option>
+            <option value={16}>Breads</option>
+            <option value={17}>Holidays/ Events</option>
+            <option value={18}>Get Togethers</option>
+            <option value={3}>Beverages</option>
           </select>
           <div
-            className="d-flex flex-row flex-wrap justify-content-center"
+            className="d-flex flex-column justify-content-center"
             style={{
               margin: "5vh 1vw",
               border: "1px solid white",
               boxShadow: "0 0 2vh #333",
+              width: "100%",
             }}
           >
             <div
@@ -258,7 +294,7 @@ const UserRecipes = (props) => {
           </div>
           <Button
             className={classes.button}
-            type='submit'
+            type="submit"
             size="medium"
             variant="outlined"
             style={{ boxShadow: "0 0 2vh #333" }}
@@ -270,7 +306,7 @@ const UserRecipes = (props) => {
       <div
         className="recipe-form"
         style={{
-          width: "50vw",
+          width: "30vw",
           minHeight: "50vh",
           color: "white",
           backgroundColor: "#222",
@@ -284,6 +320,7 @@ const UserRecipes = (props) => {
             maxWidth: "95%",
             margin: "2vh auto",
             boxShadow: "0 0 2vh #333",
+            padding: "6vh 0",
           }}
         >
           <h5 className="display-4" style={{ fontSize: "5vh", margin: "" }}>

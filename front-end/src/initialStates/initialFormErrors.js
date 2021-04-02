@@ -1,7 +1,7 @@
 const initialFormErrors = {
-    username: '',
-    email: '', 
-    password: '',
+    user_username: '',
+    user_email: '', 
+    user_password: '',
 };
 
 

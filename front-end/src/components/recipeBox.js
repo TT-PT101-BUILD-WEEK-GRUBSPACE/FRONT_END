@@ -4,10 +4,10 @@ import RecipeCards from "./recipeCards";
 
 export default function RecipeBox() {
   const [recipes, setRecipes] = useState([]);
-
+  const ghost = "";
   useEffect(() => {
     axiosWithAuth()
-      .get("https://secret-family-recipes-101.herokuapp.com/api/recipes")
+      .get("https://secret-family-recipes-101.herokuapp.com/api/")
       .then((res) => {
         setRecipes(res.data);
         console.log(res.data);
@@ -18,7 +18,7 @@ export default function RecipeBox() {
           error
         );
       });
-  }, [false]);
+  }, [ghost]);
 
   return (
     <div>

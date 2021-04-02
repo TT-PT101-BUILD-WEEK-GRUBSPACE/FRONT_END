@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function RecipeCards(props) {
   const {
     recipe_name,
@@ -38,14 +40,14 @@ export default function RecipeCards(props) {
         alt={recipe_name}
         style={{
           maxWidth: "20vw",
-          margin: "5vh",
+          margin: "5vh auto",
           border: "2.5vh solid white",
           boxShadow: "0 0 2vh #AAA",
         }}
       />
       <h5>RECIPE SOURCE: {recipe_source}</h5>
-      <h6>SUBMITTED BY: {submitted_by}</h6>  
-      <p>CATEGORY: {category_name}</p> 
+      <h6>SUBMITTED BY: {submitted_by}</h6>
+      <p>CATEGORY: {category_name}</p>
       <div
         className="d-flex flex-row flex-wrap justify-content-center"
         style={{
