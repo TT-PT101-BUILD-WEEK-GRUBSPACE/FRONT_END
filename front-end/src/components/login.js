@@ -64,7 +64,7 @@ const Login = () => {
       ...user,
       [name]: value,
     }));
-    console.log("name:", name, "value:", value);
+    //console.log("name:", name, "value:", value);
   };
 
   useEffect(() => {
@@ -76,42 +76,43 @@ const Login = () => {
 
     setFetching(true);
     if (login) {
-      console.log(user);
+      //console.log(user);
       noAuthAxios()
         .post(
-          "/login",
+          "/users/login",
           user
         )
         .then((res) => {
           localStorage.setItem("token", res.data.payload);
-          setUser(initialState);
+          setUser(user);
           alert(
             "Welcome to your personal recipe box. Manage your recipes using the form below to get started"
           );
           history.push("/user_recipes");
           setFetching(false);
           const token = localStorage.getItem("token");
-          console.log(token);
+          //console.log(token);
         })
         .catch((err) => {
           console.log("error", err);
-          alert(
-            "Please Provide a Valid Username, and Password Combination or Start A New Account By Clicking The Sign-up Button"
-          );
-          const backError = err.response.data.message;
+          //alert(
+          //   "Please Provide a Valid Username, and Password Combination or Start A New Account By Clicking The Sign-up Button"
+          // );
+          history.push('/user_recipes')
+          const backError = err.data.message;
           setBackendError(backError);
           console.log(backError, "sign in error from the api");
         });
     } else {
-      console.log(user);
+      //console.log(user);
       noAuthAxios()
         .post(
-          "/register",
-          initialState
+          "/users/register",
+          user
         )
         .then(({ res }) => {
           //dispatch(userLogin(data));
-          console.log("Resolved Token Value", res.data.payload);
+          //console.log("Resolved Token Value", res.data.payload);
           localStorage.setItem("token", res.data.payload);
           setLogin(login);
           history.push("/user_recipes");
