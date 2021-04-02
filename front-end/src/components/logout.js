@@ -21,16 +21,17 @@ const Logout = () => {
       }}
     >
       <Link
+        to="/"
         onClick={() => logout()}
         style={{
           margin: "5vh 0",
           fontSize: "5vh",
-          backgroundColor: '#222',
+          backgroundColor: "#222",
           color: "white",
           textDecoration: "none",
           border: ".05rem solid white",
           padding: "2rem 3rem",
-          opacity: '',
+          opacity: "",
         }}
       >
         <h2>Thank you for visiting Grubspace.</h2>

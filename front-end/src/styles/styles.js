@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "10rem",
   },
   outerDiv: {
-    marginTop: "10vh",
+    margin: "10vh auto",
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
