@@ -90,7 +90,7 @@ const Login = () => {
           );
           history.push("/user_recipes");
           setFetching(false);
-          const token = localStorage.getItem("token");
+          //const token = localStorage.getItem("token");
           //console.log(token);
         })
         .catch((err) => {
