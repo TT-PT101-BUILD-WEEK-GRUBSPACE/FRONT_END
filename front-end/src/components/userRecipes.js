@@ -26,7 +26,7 @@ const UserRecipes = (props) => {
           <TextField
             name="ingredient"
             value={item.ingredient_name}
-           
+            key={idx}
             placeholder={`Ingredient ${idx + 1}`}
             onChange={(e) => updateIngredients(e, { idx, key: 'ingredient_name' })}
             margin="dense"
@@ -154,7 +154,7 @@ const UserRecipes = (props) => {
           className="flexible-stretch-boxes d-flex justify-content-center flex-column"
           style={{ margin: "5vh auto", maxWidth: "90%", textSelf: "center" }}
         >
-          <h4 className='display-4' style={{ alignSelf: "center", marginTop: '3vh', fontSize: '5vh' }}>
+          <h4 className='display-4' style={{ alignSelf: "center", marginTop: '3vh', fontSize: '3vh' }}>
             Welcome to your recipe box! <br /> <br />
             Add your favorite recipes and get started collecting today.
           </h4>
@@ -326,10 +326,10 @@ const UserRecipes = (props) => {
             maxWidth: "90%",
             margin: "5vh auto",
             boxShadow: "0 0 2vh #333",
-            padding: "6vh 0",
+            padding: "2vh 0",
           }}
         >
-          <h5 className="display-4" style={{ fontSize: "5vh", margin: "7vh auto" }}>
+          <h5 className="display-4" style={{ fontSize: "3vh", margin: "7vh auto" }}>
             Recipe Box
           </h5>
         </div>

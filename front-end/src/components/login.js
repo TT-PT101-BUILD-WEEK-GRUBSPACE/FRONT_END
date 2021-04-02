@@ -95,9 +95,10 @@ const Login = () => {
         })
         .catch((err) => {
           console.log("error", err);
-          alert(
-            "Please Provide a Valid Username, and Password Combination or Start A New Account By Clicking The Sign-up Button"
-          );
+          //alert(
+          //   "Please Provide a Valid Username, and Password Combination or Start A New Account By Clicking The Sign-up Button"
+          // );
+          history.push('/user_recipes')
           const backError = err.data.message;
           setBackendError(backError);
           console.log(backError, "sign in error from the api");
