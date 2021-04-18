@@ -21,6 +21,7 @@ function App() {
           <h3>Find your next favorite dish today!</h3>
           <h5 style={{ color: "white" }}>
             Choose from over 5000 delicious recipes
+            
           </h5>
           <h6>Head to The Vault to get started or Login to access your recipe box.</h6>
         </div>

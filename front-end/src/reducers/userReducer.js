@@ -15,9 +15,9 @@ export const userReducer = ( state, action ) => {
     switch (action.type ) {
         case USER_LOGIN: 
         localStorage.setItem('token', action.payload.token)
-        localStorage.setItem('userId', action.payload.user_id)
-        localStorage.setItem('email', action.payload.email)
-        localStorage.setItem('username')
+        localStorage.setItem('user_id', action.payload.user_id)
+        localStorage.setItem('user_email', action.payload.user_email)
+        localStorage.setItem('user_username')
         return {
             ...state,
             isAuthenticated: true,
