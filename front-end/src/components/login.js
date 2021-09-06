@@ -8,8 +8,8 @@ import initialState from "../initialStates/initialCredentials";
 import initialFormErrors from "../initialStates/initialFormErrors";
 import "bootstrap/dist/css/bootstrap.css";
 import * as yup from "yup";
-
-const Login = () => {
+import { postLogIn, createUser } from "../state/actionCreators";
+const Login = (props) => {
   const history = useHistory();
 
   const [login, setLogin] = useState(true);
@@ -77,55 +77,45 @@ const Login = () => {
     setFetching(true);
     if (login) {
       //console.log(user);
-      noAuthAxios()
-        .post(
-          "/users/login",
-          user
-        )
-        .then((res) => {
-          localStorage.setItem("token", res.data.payload);
+      props.postLogIn(user,(isSuccessful)=>{
+        if(isSuccessful){
           setUser(user);
           alert(
             "Welcome to your personal recipe box. Manage your recipes using the form below to get started"
           );
           history.push("/user_recipes");
           setFetching(false);
-          //const token = localStorage.getItem("token");
-          //console.log(token);
-        })
-        .catch((err) => {
+        }
+        else{
           console.log("error", err);
-          //alert(
-          //   "Please Provide a Valid Username, and Password Combination or Start A New Account By Clicking The Sign-up Button"
-          // );
           history.push('/user_recipes')
           const backError = err.data.message;
           setBackendError(backError);
           console.log(backError, "sign in error from the api");
-        });
-    } else {
-      //console.log(user);
+        }
+      });
+
       noAuthAxios()
         .post(
-          "/users/register",
+          "/users/login",
           user
         )
-        .then(({ res }) => {
-          //dispatch(userLogin(data));
-          //console.log("Resolved Token Value", res.data.payload);
-          localStorage.setItem("token", res.data.payload);
+    } else {
+      props.createUser(user,(isSuccessful)=>{
+        if(isSuccessful){
           setLogin(login);
           history.push("/user_recipes");
           setFetching(false);
-        })
-        .catch((err) => {
+        }
+        else{
           alert(
             "Please Provide a Valid Username, Email, and Password (6-15 characters long) to Create an Account"
           );
-          const backError = err.response.data.message;
+          const backError = props.error;
           setBackendError(backError);
-          console.log(backError, "sign in error from the api");
-        });
+          console.log(backError, "sign in error from the api");    
+        }
+      });
     }
   };
 
@@ -210,5 +200,16 @@ const Login = () => {
     </>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    numberOfSuccessCalls: state.api.postLogIn,
+    status: state.api.postLogIn.status,
+    error: state.api.postLogIn.errMsg
+  }
+}
 
-export default Login;
+const mapDispatchToProps = {
+  postLogIn,
+  createUser
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

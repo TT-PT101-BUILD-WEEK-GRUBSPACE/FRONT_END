@@ -5,13 +5,13 @@ import useStyles from "../styles/styles";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import RecipeBox from "./recipeBox";
 import { initialFormValues } from "../initialStates/initialStates";
-
+import { connect } from "react-redux";
+import {createRecipe} from "../state/actionCreators";
 const UserRecipes = (props) => {
   const classes = useStyles();
   let history = useHistory();
   //const isDisabled = false;
 
-  const [recipe, setRecipe] = useState({});
   const [formValues, setFormValues] = useState(initialFormValues);
   //const [disabled, setDisabled] = useState(isDisabled);
 
@@ -101,21 +101,11 @@ const UserRecipes = (props) => {
   //CHANGE HANDLERS
 
   const postNewRecipe = (newRecipe) => {
-    axiosWithAuth()
-      .post(
-        "/recipes",
-        newRecipe
-      )
-      .then((res) => {
-        setRecipe(res.data);
-        console.log(recipe)
-        console.log("API USAGE SUCCESSFUL", res.data);
-        setFormValues(initialFormValues);
+    props.createRecipe(newRecipe,(isSuccessful)=>{
+      if(isSuccessful){
         history.push("/user_recipes");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      }
+    });
   };
 
   const handleChange = (e) => {
@@ -339,5 +329,10 @@ const UserRecipes = (props) => {
     </div>
   );
 };
+const mapStateToProps={
 
-export default UserRecipes;
+};
+const mapDispatchToProps={
+  createRecipe
+};
+export default connect(mapStateToProps,mapDispatchToProps)(UserRecipes);

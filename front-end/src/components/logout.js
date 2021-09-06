@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-
-const Logout = () => {
+import {connect} from "react-redux";
+import { logout } from "../state/actionCreators";
+const Logout = (props) => {
   let history = useHistory();
   const logout = () => {
     alert("You have been logged out. Thank you for visiting");
-    localStorage.clear();
+    props.logout();
     history.push("/");
   };
 
@@ -42,5 +43,7 @@ const Logout = () => {
     </div>
   );
 };
-
-export default Logout;
+const mapDispatchToProps={
+  logout
+};
+export default connect(null,mapDispatchToProps)(Logout);

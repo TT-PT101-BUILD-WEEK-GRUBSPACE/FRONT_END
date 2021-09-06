@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import React, { useEffect } from "react";
 import RecipeCards from "./recipeCards";
+import {connect} from "react-redux";
+const RecipeBox=(props)=>{
+  const {getRecipes,recipes} = props;
+  useEffect(()=>{
+    // initial API call on mount
+    getRecipes();
+},[getRecipe]);
 
-export default function RecipeBox() {
-  const [recipes, setRecipes] = useState([]);
-  const ghost = "";
-  useEffect(() => {
-    axiosWithAuth()
-      .get("recipes/my-list")
-      .then((res) => {
-        setRecipes(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(
-          "ERROR MESSAGE FROM getRecipes in RecipeBox component",
-          error
-        );
-      });
-  }, [ghost]);
 
   return (
     <div>
@@ -40,3 +29,14 @@ export default function RecipeBox() {
     </div>
   );
 }
+const mapStateToProps=(state)=>{
+  return{
+      recipes:state.user.myList,
+  };
+};
+const mapDispatchToProps=(dispatch)=>{
+  return{
+      getRecipes:()=>dispatch(getRecipes())
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(RecipeBox);
