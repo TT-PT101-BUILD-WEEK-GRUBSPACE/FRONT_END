@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getRecipe } from "../actions";
+import { getRecipes } from "../state/actionCreators";
 import { makeStyles } from "@material-ui/core/styles";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
@@ -78,12 +78,12 @@ const Recipe = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading,
-    error: state.error,
-    recipe: state.recipe,
+    apiStatus:state.api.getRecipes.status,
+    error: state.api.getRecipes.errMsg,
+    recipes: state.recipes,
   };
 };
 
-const mapDispatchToProps = { getRecipe };
+const mapDispatchToProps = { getRecipes };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

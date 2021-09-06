@@ -22,7 +22,7 @@ export const postLogIn = (formValues, handleAPIStatus) => (dispatch) =>{
     status:API_START,
     api:"postLogIn"
   }});
-  axios.post(`auth/login`,formValues)
+  axios().post(`auth/login`,formValues)
   .then(async(res)=>{
     await dispatch({type:API_STATUS_CHANGE,payload:{
       status:API_SUCCESS,
@@ -58,7 +58,7 @@ export const createUser = (formValues,handleAPIStatus) => (dispatch) => {
     api:"createUser"
   }});
   console.log(formValues)
-  axios.post(`auth/register`,formValues)
+  axios().post(`auth/register`,formValues)
   .then(async(res)=>{
     await dispatch({type:API_STATUS_CHANGE,payload:{
       status:API_SUCCESS,

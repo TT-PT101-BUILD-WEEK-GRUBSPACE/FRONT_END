@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, LinearProgress, TextField } from "@material-ui/core";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import noAuthAxios from "../utils/axios";
 import signUpSchema from "./signUpSchema";
 import loginSchema from "./loginSchema";
@@ -184,14 +184,14 @@ const Login = (props) => {
             {login ? "Login" : "Sign Up"}
           </Button>
           {fetching ? <LinearProgress color="secondary" /> : <></>}
-          <Link
+          <Button
             size="small"
             variant="contained"
             onClick={() => setLogin(!login)}
             style={{color: 'black'}}
           >
            <em> {login ? "New User? Sign Up Today" : "Already have an account? Log In Here"} </em>
-          </Link>
+          </Button>
         </div>
       </form>
     </>
