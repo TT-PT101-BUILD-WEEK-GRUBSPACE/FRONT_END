@@ -9,10 +9,15 @@ import SignUp from './components/signup'
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
-import UserRecipes from './components/userRecipes'
-
-
-function App() {
+import UserRecipes from './components/userRecipes';
+import {connect} from "react-redux";
+import {checkUserAuth} from "./state/actionCreators";
+import {useEffect} from "react";
+function App(props) {
+  const {checkUserAuth} = props;
+  useEffect(()=>{
+    checkUserAuth();
+  },[checkUserAuth]);
   return (
     <Router>
       <div className="parallax-bg jumbotron" style={{ minHeight: "100vh" }}>
@@ -49,5 +54,9 @@ function App() {
     </Router>
   );
 }
-
-export default App;
+const mapDispatchToProps=(dispatch)=>{
+  return {
+    checkUserAuth:()=>dispatch(checkUserAuth())
+  };
+};
+export default connect(null,mapDispatchToProps)(App);

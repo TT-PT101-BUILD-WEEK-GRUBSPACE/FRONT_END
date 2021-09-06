@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { searchValue, getRecipe } from "../actions";
+import { getRecipes } from "../state/actionCreators";
 import Recipes from "./recipes";
 
 const initialState = "";
 
 const Title = (props) => {
+  const {getRecipes} =props;
   const [searchValues, setSearchValues] = useState(initialState);
 
   const handleChanges = (e) => {
@@ -22,8 +23,8 @@ const Title = (props) => {
   };
 
   useEffect(() => {
-    props.getRecipe(props.searchValue);
-  }, [props]);
+    getRecipes();
+  }, [getRecipes]);
 
   return (
     <div
@@ -79,16 +80,10 @@ const Title = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  getRecipe(state.searchValue);
-  console.log("state mapped from title", state);
-  return {
-    searchValue: state.searchValue,
-  };
 };
 
 const mapDispatchToProps = {
-  searchValue,
-  getRecipe,
+  getRecipes,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Title);
