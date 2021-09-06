@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 import useStyles from "../styles/styles";
-import axiosWithAuth from "../utils/axiosWithAuth";
 import RecipeBox from "./recipeBox";
 import { initialFormValues } from "../initialStates/initialStates";
 import { connect } from "react-redux";

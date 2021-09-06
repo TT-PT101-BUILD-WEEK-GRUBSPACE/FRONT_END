@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import RecipeCards from "./recipeCards";
 import {connect} from "react-redux";
+import { getRecipes } from "../state/actionCreators";
 const RecipeBox=(props)=>{
   const {getRecipes,recipes} = props;
   useEffect(()=>{
     // initial API call on mount
     getRecipes();
-},[getRecipe]);
+},[getRecipes]);
 
 
   return (

@@ -1,17 +1,16 @@
 // please keep all the action creators and reducers in the same file
 
 import { API_STATUS_CHANGE,
-  Recipes_RECEIVED, 
   USER_CREATED, 
-  USER_Recipes_RECEIVED, 
   USER_LOGGED_IN, 
+  RECIPES_RECEIVED
 } from '../actionTypes';
 import {
   API_START,
   API_SUCCESS,
   API_FAILURE
- } from '../store/constants';
-import {apiInitialState} from '../store/index';
+ } from '../constants';
+import {apiInitialState} from '../store';
 import axios from "../../utils/axios";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 

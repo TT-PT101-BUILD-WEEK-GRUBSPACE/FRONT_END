@@ -9,6 +9,7 @@ import initialFormErrors from "../initialStates/initialFormErrors";
 import "bootstrap/dist/css/bootstrap.css";
 import * as yup from "yup";
 import { postLogIn, createUser } from "../state/actionCreators";
+import { connect } from "react-redux";
 const Login = (props) => {
   const history = useHistory();
 
@@ -87,11 +88,7 @@ const Login = (props) => {
           setFetching(false);
         }
         else{
-          console.log("error", err);
           history.push('/user_recipes')
-          const backError = err.data.message;
-          setBackendError(backError);
-          console.log(backError, "sign in error from the api");
         }
       });
 
